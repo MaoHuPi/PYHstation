@@ -1,0 +1,124 @@
+{
+    "homework": {
+        "國文": [
+            {
+                "name": "國三暑假作業閱讀心得", 
+                "link": "https://classroom.google.com/c/MzczMDY0MzMwNjY0/a/MzczMDY0MzMwOTE5/details", 
+                "deadline": "2021/08/27 23:59", 
+                "new": false
+            }, 
+            {
+                "name": "第五課藍本練習", 
+                "link": "https://classroom.google.com/c/MzczMDY0MzMwNjY0/a/Mzc1MTE2MjcxNjM5/details", 
+                "deadline": "2021/08/02 23:59", 
+                "new": false
+            }
+        ], 
+        "數學": [ 
+            {
+                "name": "勝經5,6單元", 
+                "link": "https://classroom.google.com/c/MzcyNzU4OTMwMjc4/a/Mzc1NDM0NDc1MjA4/details", 
+                "deadline": "2021/08/08 23:59", 
+                "new": true
+            }, 
+            {
+                "name": "講義1-4進階到最後", 
+                "link": "https://classroom.google.com/c/MzcyNzU4OTMwMjc4/a/Mzc1NDM0NDc1MjI2/details", 
+                "deadline": "2021/08/02 23:59", 
+                "new": true
+            }
+        ], 
+        "生物": [
+            {
+                "name": "講義p.~23", 
+                "link": "", 
+                "deadline": "2021/08/05 10:20", 
+                "new": false
+            }
+        ], 
+        "理化": [
+            {
+                "name": "07/30隨堂提問", 
+                "link": "https://classroom.google.com/c/MzczMDg4Mjk1MTA5/a/Mzc1MDQ4MzQ3MTk4/details", 
+                "deadline": "2021/08/04 14:30", 
+                "new": false
+            }, 
+            {
+                "name": "08/01課後作業", 
+                "link": "https://classroom.google.com/c/MzczMDg4Mjk1MTA5/a/Mzc1MzA4NzQ3MDEw/details", 
+                "deadline": "(標示為完成即可)", 
+                "new": true
+            }
+        ], 
+        "地科": [
+            {
+                "name": "講義p.20~24", 
+                "link": "https://classroom.google.com/c/MzcxMDg2OTc5Mzg1/p/Mzc1NTA0NTkzMTE5/details", 
+                "deadline": "開學檢查", 
+                "new": true
+            }
+        ],
+        "地理": [
+            {
+                "name": "整理課堂筆記", 
+                "link": "https://classroom.google.com/c/MzczMDQ0MTEyMzAy/p/Mzc0OTA5NTUxNDE1/details", 
+                "deadline": "(不用上傳)", 
+                "new": false
+            }
+        ], 
+        "英語": [
+            {
+                "name": "08/02課堂筆記", 
+                "link": "https://classroom.google.com/c/MzczMDY2MjUzMDE4/a/Mzc1MzQ5NTc3NjM3/details", 
+                "deadline": "2021/08/02 10:10", 
+                "new": true
+            }, 
+            {
+                "name": "B5L3Grammar1小考訂正", 
+                "link": "https://classroom.google.com/c/MzczMDY2MjUzMDE4/a/Mzc0ODg5MDYwNDA4/details", 
+                "deadline": "2021/08/02 17:30", 
+                "new": true
+            }
+        ], 
+        "圖書": [
+            {
+                "name": "閱讀心得寫作比賽", 
+                "link": "https://classroom.google.com/c/MzcxMzg2NTg3ODM5/a/MzczOTE2MTk4NDIz/details", 
+                "deadline": "2021/09/03 23:59", 
+                "new": false
+            }, 
+            {
+                "name": "藝文欣賞作業", 
+                "link": "https://classroom.google.com/c/MzcxMzg2NTg3ODM5/a/Mzc0NTY2OTU5NTc4/details", 
+                "deadline": "2021/09/03 23:59", 
+                "new": false
+            }
+        ], 
+        "其他": [
+            {
+                "name": "[札記]題目請見公告欄", 
+                "link": "https://classroom.google.com/c/MzY3MzQ2ODQ3OTA5/a/Mzc1NDk0NzU1NzE1/details", 
+                "deadline": "2021/08/08 23:59", 
+                "new": true
+            }
+        ]
+    }, 
+    "note": [
+        {
+            "name": "[地理]p.58", 
+            "src": [
+                "image/20210802地理筆記01.jpg"
+            ]
+        }, 
+        {
+            "name": "[其他]校車表", 
+            "src": [
+                "image/20210802其他筆記01.jpg"
+            ]
+        }
+    ], 
+    "matter": [
+        "1）校車搭乘路線若與上學年不一樣皆屬於正常調動，上下車的站點正確即可，路線以今日公告表單的新路線為準。", 
+        "2）本次札記題目:<br>&ensp;&ensp;&ensp;&ensp;1.我小時候/現在/未來可能/最想要從事的職業是?<br>&ensp;&ensp;&ensp;&ensp;2.關於自律這件事我的想法...<br>&ensp;&ensp;&ensp;&ensp;3.我理想中的高中生活<br>&ensp;&ensp;&ensp;&ensp;4.回想這兩個禮拜，我有活的讓自己後悔嗎?"
+    ]
+}

@@ -1,0 +1,92 @@
+{
+    "homework": {
+        "國文": [
+            {
+                "name": "國三暑假作業閱讀心得", 
+                "link": "https://classroom.google.com/c/MzczMDY0MzMwNjY0/a/MzczMDY0MzMwOTE5/details", 
+                "deadline": "2021/08/27 23:59", 
+                "new": false
+            }
+        ], 
+        "數學": [ 
+            {
+                "name": "勝經5,6單元", 
+                "link": "https://classroom.google.com/c/MzcyNzU4OTMwMjc4/a/Mzc1NDM0NDc1MjA4/details", 
+                "deadline": "2021/08/08 23:59", 
+                "new": false
+            }
+        ], 
+        "生物": [
+            {
+                "name": "講義p.~23", 
+                "link": "", 
+                "deadline": "2021/08/05 10:20", 
+                "new": false
+            }
+        ], 
+        "理化": [
+            {
+                "name": "07/30隨堂提問", 
+                "link": "https://classroom.google.com/c/MzczMDg4Mjk1MTA5/a/Mzc1MDQ4MzQ3MTk4/details", 
+                "deadline": "2021/08/04 14:30", 
+                "new": false
+            }, 
+            {
+                "name": "08/01課後作業", 
+                "link": "https://classroom.google.com/c/MzczMDg4Mjk1MTA5/a/Mzc1MzA4NzQ3MDEw/details", 
+                "deadline": "(標示為完成即可)", 
+                "new": false
+            }
+        ], 
+        "地科": [
+            {
+                "name": "講義p.20~24", 
+                "link": "https://classroom.google.com/c/MzcxMDg2OTc5Mzg1/p/Mzc1NTA0NTkzMTE5/details", 
+                "deadline": "開學檢查", 
+                "new": false
+            }
+        ],
+        "英文": [
+            {
+                "name": "課本p.53 + 百試達p.35~40", 
+                "link": "", 
+                "deadline": "不用上傳", 
+                "new": true
+            }
+        ],
+        "資訊": [
+            {
+                "name": "邏輯運算", 
+                "link": "https://classroom.google.com/c/MzcyODU1MDQ5MzIy/a/Mzc1NjQwMDg2Mjgz/details", 
+                "deadline": "2021/08/03", 
+                "new": true
+            }
+        ],
+        "圖書": [
+            {
+                "name": "閱讀心得寫作比賽", 
+                "link": "https://classroom.google.com/c/MzcxMzg2NTg3ODM5/a/MzczOTE2MTk4NDIz/details", 
+                "deadline": "2021/09/03 23:59", 
+                "new": false
+            }, 
+            {
+                "name": "藝文欣賞作業", 
+                "link": "https://classroom.google.com/c/MzcxMzg2NTg3ODM5/a/Mzc0NTY2OTU5NTc4/details", 
+                "deadline": "2021/09/03 23:59", 
+                "new": false
+            }
+        ], 
+        "其他": [
+            {
+                "name": "[札記]題目請見08/02公告欄", 
+                "link": "https://classroom.google.com/c/MzY3MzQ2ODQ3OTA5/a/Mzc1NDk0NzU1NzE1/details", 
+                "deadline": "2021/08/08 23:59", 
+                "new": false
+            }
+        ]
+    }, 
+    "note": [], 
+    "matter": [
+        "暫無公告事項"
+    ]
+}

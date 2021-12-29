@@ -1,0 +1,78 @@
+{
+    "homework": {
+        "國文": [
+            {
+                "name": "國三暑假作業閱讀心得", 
+                "link": "https://classroom.google.com/c/MzczMDY0MzMwNjY0/a/MzczMDY0MzMwOTE5/details", 
+                "deadline": "2021/08/27 23:59", 
+                "new": false
+            }
+        ], 
+        "數學": [ 
+            {
+                "name": "勝經3,4單元", 
+                "link": "https://classroom.google.com/c/MzcyNzU4OTMwMjc4/a/Mzc0MzI0ODU2MTgx/details", 
+                "deadline": "2021/08/01 23:59", 
+                "new": false
+            }, 
+            {
+                "name": "07/27課堂筆記 + 講義P68-71", 
+                "link": "https://classroom.google.com/c/MzcyNzU4OTMwMjc4/a/Mzc0NTc3NTUxMDY1/details", 
+                "deadline": "2021/07/27 23:59", 
+                "new": true
+            }
+        ], 
+        "生物": [
+            {
+                "name": "07/23課堂筆記 + 講義p.7~9", 
+                "link": "", 
+                "deadline": "2021/07/29 23:59", 
+                "new": false
+            }
+        ], 
+        "地科": [
+            {
+                "name": "講義到5-1重點2(p.11上半)", 
+                "link": "https://classroom.google.com/c/MzcxMDg2OTc5Mzg1/p/MzcxMjc3OTk1MzYz/details", 
+                "deadline": "開學", 
+                "new": false
+            }
+        ], 
+        "地理": [
+            {
+                "name": "想筆記方法 + 準備所需用具", 
+                "link": "", 
+                "deadline": "(不用上傳)", 
+                "new": false
+            }
+        ], 
+        "公民": [
+            {
+                "name": "國際新聞心得", 
+                "link": "https://classroom.google.com/c/MzY0NzU4NDYwNzc2/a/Mzc0NDM0Mzk1MDg1/details", 
+                "deadline": "2021/07/27 23:59", 
+                "new": true
+            }
+        ], 
+        "資訊": [
+            {
+                "name": "輸入與輸出格式", 
+                "link": "https://classroom.google.com/c/MzcyODU1MDQ5MzIy/a/Mzc0NTU3MjU2NDcz/details", 
+                "deadline": "2021/07/27 23:59", 
+                "new": true
+            }
+        ], 
+        "其他": [
+            {
+                "name": "[札記]題目請見公告欄", 
+                "link": "https://classroom.google.com/c/MzY3MzQ2ODQ3OTA5/a/Mzc0MzI0ODU2MjI0/details", 
+                "deadline": "2021/08/01 23:59", 
+                "new": false
+            }
+        ]
+    }, 
+    "note": [], 
+    "matter": [
+        "1）老師們去打疫苗啦！"
+    ]
+}
