@@ -5,4 +5,4 @@
 > 
 > 筆記圖片：318的各科老師
 
-![alt text](https://github.com/maohupi/318station/blob/main/318station.jpg?raw=true)
+![318station專案封面](https://github.com/maohupi/318station/blob/main/318station.jpg?raw=true)
