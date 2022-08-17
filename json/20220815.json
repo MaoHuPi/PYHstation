@@ -1,0 +1,60 @@
+{
+    "homework": {
+        "國文": [
+            {
+                "name": "8/16(二) 考花和尚大鬧桃花村注釋(1~25)", 
+                "link": "https://maohupi.riarock.com/web/tool/smartsheet/index.php?page=sheet&sheet=GwNjl2INHPNB7tOX3bCY", 
+                "deadline": "2022/08/16 09:50", 
+                "new": true
+            }
+        ], 
+        "數學": [
+            {
+                "name": "數學銜接123第六單元(p.24~26)", 
+                "link": "", 
+                "deadline": "2022/08/16 08:55", 
+                "new": true
+            }
+        ], 
+        "物理": [
+            {
+                "name": "單元一、二即刻練習(p.4~7, 11~14)", 
+                "link": "", 
+                "deadline": "2022/08/19 08:00", 
+                "new": false
+            }
+        ], 
+        "英文": [
+            {
+                "name": "8/16(二) 考普一英文暑輔教材p.6例句x2(4-1, 5-3)默寫", 
+                "link": "https://maohupi.riarock.com/web/tool/smartsheet/index.php?page=sheet&sheet=q8vtONmHTQfjjEf5YrSm", 
+                "deadline": "2022/08/16 13:40", 
+                "new": true
+            }
+        ], 
+        "資訊": [
+            {
+                "name": "簡易單字測驗機", 
+                "link": "https://classroom.google.com/c/NTI2MTU2OTExMjkw/a/NTM4NTU5NDA0NzQx/details", 
+                "answer": "https://drive.google.com/drive/folders/1RWcovG-MOENtTyDRTk6es5NNOfI6Xh9e?usp=sharing", 
+                "deadline": "", 
+                "new": true
+            }
+        ], 
+        "其他": [
+            {
+                "name": "閱讀心得寫作比賽＜111暑期＞", 
+                "link": "https://classroom.google.com/c/NTM0MDI4MDE0ODY0/a/NDk3MTkyNjQ4MzI2/details", 
+                "deadline": "2022/09/08 00:00", 
+                "new": false
+            }
+        ]
+    }, 
+    "note": [], 
+    "matter": [
+        "1. 8/1(一) ~ 8/14(日) 多元選修、增廣選課。", 
+        "2. 8/17(三) ~ 8/24(三) 選社團。", 
+        "3. 9/2(三)8:40 新生體檢(費用$450由班費支出)。", 
+        "3. 新增功能：有連結作業之底線、有連結作業之對話框"
+    ]
+}

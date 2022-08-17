@@ -1,0 +1,71 @@
+{
+    "homework": {
+        "國文": [
+            {
+                "name": "8/8(一) 考傷仲永注釋(21~40)", 
+                "link": "", 
+                "deadline": "2022/08/08 08:55", 
+                "new": true
+            }, 
+            {
+                "name": "8/10(三) 考古文運動筆記", 
+                "link": "", 
+                "deadline": "2022/08/10 11:40", 
+                "new": true
+            }
+        ], 
+        "數學": [
+            {
+                "name": "數學銜接123(U3例題4~10 + 綜合驗收一)", 
+                "link": "", 
+                "deadline": "2022/08/05 08:55", 
+                "new": true
+            }
+        ], 
+        "英文": [
+            {
+                "name": "8/5(五) 考英文銜接特快車單字", 
+                "link": "", 
+                "deadline": "2022/08/05 09:50", 
+                "new": true
+            }
+        ], 
+        "資訊": [
+            {
+                "name": "blockly game-迷宮", 
+                "link": "https://classroom.google.com/c/NTI2MTU2OTExMjkw/a/NTM3NjU2MTk2MzI0/details", 
+                "deadline": "", 
+                "new": false
+            }, 
+            {
+                "name": "blockly game-小鳥", 
+                "link": "https://classroom.google.com/c/NTI2MTU2OTExMjkw/a/NTM3NjU2NTgwNTIw/details", 
+                "deadline": "", 
+                "new": false
+            }
+        ], 
+        "其他": [
+            {
+                "name": "閱讀心得寫作比賽＜111暑期＞", 
+                "link": "https://classroom.google.com/c/NTM0MDI4MDE0ODY0/a/NDk3MTkyNjQ4MzI2/details", 
+                "deadline": "2022/09/08 00:00", 
+                "new": false
+            }, 
+            {
+                "name": "8/10(三)前 交免學費申請資料", 
+                "link": "", 
+                "deadline": "", 
+                "new": false
+            }
+        ]
+    }, 
+    "note": [], 
+    "matter": [
+        "1. 8/3(三) 開始登記違規，若違規則 8/4(四) 中午站生教。", 
+        "2. 8/9(二) 8:00 送繡 短袖運動服、制服 各一件。", 
+        "3. 8/11(四) 8:00 所有衣服送繡，8/12(五) 領回。", 
+        "4. 8/1(一) ~ 8/7(日) 本土語言選課，8/1(一) ~ 8/14(日) 多元選修、增廣選課。", 
+        "5. 8/17(三) ~ 8/24(三) 選社團。", 
+        "6. 9/2(三) 新生體檢。"
+    ]
+}

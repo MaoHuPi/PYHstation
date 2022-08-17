@@ -1,0 +1,67 @@
+{
+    "homework": {
+        "國文": [
+            {
+                "name": "8/3(三) 帶南山活頁紙(筆記會算成績)", 
+                "link": "", 
+                "deadline": "2022/08/03 08:00", 
+                "new": false
+            }, 
+            {
+                "name": "8/4(四) 考傷仲永注釋(1~20)", 
+                "link": "", 
+                "deadline": "2022/08/04 08:00", 
+                "new": false
+            }
+        ], 
+        "數學": [
+            {
+                "name": "數學銜接123(U2, 例題1~7)", 
+                "link": "", 
+                "deadline": "2022/08/03 08:55", 
+                "new": true
+            }
+        ], 
+        "資訊": [
+            {
+                "name": "blockly game-迷宮", 
+                "link": "https://classroom.google.com/c/NTI2MTU2OTExMjkw/a/NTM3NjU2MTk2MzI0/details", 
+                "deadline": "", 
+                "new": false
+            }, 
+            {
+                "name": "blockly game-小鳥", 
+                "link": "https://classroom.google.com/c/NTI2MTU2OTExMjkw/a/NTM3NjU2NTgwNTIw/details", 
+                "deadline": "", 
+                "new": false
+            }
+        ], 
+        "其他": [
+            {
+                "name": "閱讀心得寫作比賽＜111暑期＞", 
+                "link": "https://classroom.google.com/c/NTM0MDI4MDE0ODY0/a/NDk3MTkyNjQ4MzI2/details", 
+                "deadline": "2022/09/08 00:00", 
+                "new": false
+            }, 
+            {
+                "name": "新生基本資料填寫", 
+                "link": "https://classroom.google.com/c/NTM2OTYwMzg2NTUw/a/NTM2OTYwMzg2NTU2/details", 
+                "deadline": "", 
+                "new": false
+            }, 
+            {
+                "name": "新生銀行帳本填寫", 
+                "link": "https://classroom.google.com/c/NTM2OTAwNDY0NDcz/a/NTM3MTgwMjc4NDgw/details", 
+                "deadline": "", 
+                "new": false
+            }
+        ]
+    }, 
+    "note": [], 
+    "matter": [
+        "1. 8/3(三) 開始登記違規，若違規則 8/4(四) 中午站生教。", 
+        "2. 8/9(二) 8:00 送繡 短袖運動服、制服 各一件。", 
+        "3. 8/11(四) 8:00 所有衣服送繡，8/12(五) 領回。", 
+        "4. 8/1(一) ~ 8/7(日) 本土語言選課，8/1(一) ~ 8/14(日) 多元選修、增廣選課。"
+    ]
+}
