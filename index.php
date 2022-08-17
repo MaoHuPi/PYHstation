@@ -1,4 +1,10 @@
 <?php
+$VERSION = '2.0.0';
+$TITLE = 'PYH station';
+$AUTHOR = 'MaoHuPi';
+$DES = '普一和臨時班網';
+$IMAGE = 'image/pyh.png';
+
 function DtoT($t){
     return($t[0].$t[1].$t[2].$t[3].'/'.$t[4].$t[5].'/'.$t[6].$t[7]);
 }
@@ -9,15 +15,20 @@ if($day == 'dl'){
 $isDay = 'false';
 $darkC = @$_COOKIE['darkC'] ? $_COOKIE['darkC'] : 'false';
 $showCheckedTF = @$_COOKIE['showCheckedTF'] ? $_COOKIE['showCheckedTF'] : 'true';
-if($day == 'home'){
+if($day == 'home' || $day == ''){
     $dayT = '';
     $homeworkInner = '';
     $fileNames = scandir(__DIR__.'/json/');
     $ws = array("日","一","二","三","四","五","六");
+    $homeworkLinkNum = 0;
     foreach(array_reverse($fileNames) as $v){
         if(strpos($v, '.json') == 8){
+            $homeworkLinkNum++;
             $hwDay = str_replace('.json', '', $v);
-            $homeworkInner .= '<h2 onclick="location.href = \'../318station/?day='.$hwDay.'\'">'.DtoT($hwDay).'<span style="font-size: 1vw;">（'.$ws[date('w', strtotime(DtoT($hwDay)))].'）</span></h2>';
+            $homeworkInner .= '<h2 onclick="location.href = \'?day='.$hwDay.'\'">'.DtoT($hwDay).'<span style="font-size: 1vw;">（'.$ws[date('w', strtotime(DtoT($hwDay)))].'）</span></h2>';
+        }
+        if($homeworkLinkNum >= 10){
+            break;
         }
     }
     $noteInner = '';
@@ -29,12 +40,12 @@ if($day == 'home'){
 }
 else{
     if($day == 'today'){
-        header('Location: ../318station/?day='.implode('', explode('-', date("Y-m-d"))));
+        header('Location: ?day='.implode('', explode('-', date("Y-m-d"))));
     }
     if(strlen($day) == 8){
         $dayT = DtoT($_GET['day']);
-        if(is_file('json/'.$_GET['day'].'.json')){
-            $todayList = fopen('json/'.$_GET['day'].'.json', 'rb');
+        if(is_file('json/'.$day.'.json')){
+            $todayList = fopen('json/'.$day.'.json', 'rb');
             $content = "";
             while (!feof($todayList)) {
                 $content .= fread($todayList, 10000);
@@ -51,7 +62,14 @@ else{
                     if($w['new'] == true){
                         $homeworkInner .= '<div class="new">new</div>';
                     }
-                    $homeworkInner .= '<a href="'.$w['link'].'" target="_blank" class="hWA">'.$w['name'].'</a><a class="deadline">截止時間: '.$w['deadline'].'</a><input type="checkbox" onchange="checkAll()" data-hw="'.$w['name'].'"><br></hWRow>';
+                    $hasLinkLink = isset($w['link']) && $w['link'] != '';
+                    $hasAnswerLink = isset($w['answer']) && $w['answer'] != '';
+                    $homeworkElement = in_array(true, [$hasLinkLink, $hasAnswerLink]) ? '<a onclick="alert(\''.$w['name'].'\', ['.
+                        ($hasLinkLink ? '{name: \'Link\', link: \''.$w['link'].'\'}, ' : '').
+                        ($hasAnswerLink ? '{name: \'Answer\', link: \''.$w['answer'].'\'}, ' : '').
+                        '])" target="_blank" class="hWA hasLink">'.$w['name'].'</a>' : '<a class="hWA">'.$w['name'].'</a>';
+                    $deadlineElement = isset($w['deadline']) && $w['deadline'] != '' ? '<a class="deadline">'.$w['deadline'].'</a>' : '';
+                    $homeworkInner .= $homeworkElement.$deadlineElement.'<input type="checkbox" onchange="checkAll()" data-hw="'.$w['name'].'"><br></hWRow>';
                 }
                 $homeworkInner .= '</oRow>';
             }
@@ -70,34 +88,31 @@ else{
             // for($i = 31; $i > 0; $i--){
             //     $d = (string)((int)$_GET['day']-$i);
             //     if(is_file('json/'.$d.'.json')){
-            //         $pgU = '../318station/?day='.$d;
+            //         $pgU = '?day='.$d;
             //     }
             //     $d = (string)((int)$_GET['day']+$i);
             //     if((int)($_GET['day'][6].$_GET['day'][7]) < $md[$_GET['day'][4].$_GET['day'][5]] && is_file('json/'.$d.'.json')){
-            //         $pgD = '../318station/?day='.$d;
+            //         $pgD = '?day='.$d;
             //     }
             //     $d = (string)((int)$_GET['day']+$i-$md[$_GET['day'][4].$_GET['day'][5]]+100);
             //     if((int)((string)((int)$_GET['day']+$i)[6].(string)((int)$_GET['day']+$i)[7]) > $md[$_GET['day'][4].$_GET['day'][5]]){
             //     echo $d;
             //     }
             //     if((int)($_GET['day'][6].$_GET['day'][7]) > $md[$_GET['day'][4].$_GET['day'][5]] && is_file('json/'.$d.'.json')){
-            //         $pgD = '../318station/?day='.$d;
+            //         $pgD = '?day='.$d;
             //     }
             // }
             $fileNames = scandir(__DIR__.'/json/');
-            $i = -1;
-            foreach($fileNames as $v){
-                $i++;
-                if(strpos($v, '.json') == 8 && str_replace('.json', '', $v) == $_GET['day']){
-                    break;
-                };
-            }
+            $fileNames = array_filter($fileNames, static function($v){
+                return(strpos($v, '.json') == 8);
+            });
+            $i = array_search($day.'.json', $fileNames);
             if($i > -1){
-                if($i > 0){
-                    $pgU = '../318station/?day='.str_replace('.json', '', $fileNames[$i - 1]);
+                if(array_key_exists($i - 1, $fileNames)){
+                    $pgU = '?day='.str_replace('.json', '', $fileNames[$i - 1]);
                 }
-                if($i < count($fileNames)-1){
-                    $pgD = '../318station/?day='.str_replace('.json', '', $fileNames[$i + 1]);
+                if(array_key_exists($i + 1, $fileNames)){
+                    $pgD = '?day='.str_replace('.json', '', $fileNames[$i + 1]);
                 }
             }
             $isDay = 'day';
@@ -130,8 +145,26 @@ else{
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>::318station:: [<?=$webTitle?>]</title>
-    <link rel="icon" href="image/318.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta itemprop="name" content="<?=$TITLE?>">
+    <meta itemprop="description" content="<?=$DES?>">
+    <meta itemprop="image" content="<?=$IMAGE?>">
+    <!-- twitter -->
+    <meta name="twitter:title" content="<?=$TITLE?>">
+    <meta name="twitter:card" content="<?=$TITLE?>">
+    <meta name="twitter:creator" content="@maohupi">
+    <meta name="twitter:site" content="@maohupi">
+    <meta name="twitter:description" content="<?=$DES?>">
+    <meta name="twitter:image:src" content="<?=$IMAGE?>">
+    <!-- open graph  -->
+    <meta property="og:title" content="<?=$TITLE?>"/>
+    <meta property="og:site_name" content="<?=$AUTHOR?>"/>
+    <meta property="og:description" content="<?=$DES?>"/>
+    <meta property="og:type" content="educate"/>
+    <meta property="og:image" content="<?=$IMAGE?>"/>
+    <meta property="og:url" content="https://maohupi.riarock.com/web/tool/pyhstation/"/>
+    <title>::<?=$TITLE?>:: [<?=$webTitle?>]</title>
+    <link rel="shortcut icon" href="image/pyh.ico" type="image/x-icon"/>
     <style>
         /* @font-face {
             font-family: PTSans;
@@ -148,6 +181,13 @@ else{
             background-color: #e7b88333;
             text-shadow: 0px 0px 0.1vw #e7b88366;
         }
+        *::-webkit-scrollbar {
+            background-color: transparent;
+        }
+        *::-webkit-scrollbar-thumb {
+            border-radius: 100vw;
+            background-color: #5f4323;
+        }
         a {
             text-decoration: none;
         }
@@ -158,6 +198,8 @@ else{
             margin: 0px;
             padding: 0px;
             background-color: #e7b883;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
         #pageBody, #pageNotfound, #pageHome {
             display: grid;
@@ -181,6 +223,9 @@ else{
             margin: 1.5vw 0px 0.5vw 0px;
             font-size: 1.5vw;
         }
+        .hasLink {
+            text-decoration: underline wavy;
+        }
         .hWA {
             margin: 0.5vw 0px;
             font-size: 2vw;
@@ -198,9 +243,15 @@ else{
             color: #5f4323;
         }
         .box .deadline {
+            margin-top: 2vw;
             right: 3vw;
             position: absolute;
+            opacity: 0.5;
             font-size: 1vw;
+            font-weight: bold;
+        }
+        .box .deadline::before {
+            content: '截止時間: ';
         }
         hr {
             background-color: #5f4323;
@@ -212,8 +263,10 @@ else{
             height: 0.5vw;
         }
         input[type="checkbox"] {
+            margin-top: 1vw;
             right: 1vw;
             position: absolute;
+            filter: hue-rotate(195deg);
         }
         .noteImage {
             display: inline-block;
@@ -294,36 +347,87 @@ else{
         [hWRHidden="true"] {
             display: none;
         }
+        #pageBody {
+            grid-auto-rows: auto auto auto;
+            grid-auto-columns: 60vw 20vw;
+        }
+        #pageHome {
+            grid-auto-rows: auto;
+            grid-auto-columns: 60vw 20vw;
+        }
+        #hWD, #cD {
+            grid-area: 1/1/2/2;
+        }
+        #gGD {
+            grid-area: 2/1/3/2;
+        }
+        #nD {
+            grid-area: 1/2/3/3;
+        }
+        #hD {
+            grid-area: 1/2/2/3;
+        }
+        #pGD {
+            grid-area: 3/1/4/3;
+        }
     </style>
     <style>
-        @media (min-width: 401px) {
-            #pageBody {
-                grid-auto-rows: auto auto auto;
-                grid-auto-columns: 60vw 20vw;
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 6vw;
             }
-            #pageHome {
-                grid-auto-rows: auto;
-                grid-auto-columns: 60vw 20vw;
+            h2 {
+                font-size: 5vw;
             }
-            #hWD, #cD {
-                grid-area: 1/1/2/2;
+            h3 {
+                font-size: 4vw;
             }
-            #gGD {
-                grid-area: 2/1/3/2;
+            .hasLink {
+                text-decoration: underline;
             }
-            #nD {
-                grid-area: 1/2/3/3;
+            .hWA {
+                font-size: 4vw;
             }
-            #hD {
-                grid-area: 1/2/2/3;
+            .noteImage {
+                margin: 0.3vw;
+                width: 12vw;
+                height: 12vw;
             }
-            #pGD {
-                grid-area: 3/1/4/3;
+            .new {
+                padding: 0.2vw 1vw;
+                left: -6vw;
+                opacity: 0.5;
+                font-size: 3vw;
             }
-        }
-        </style>
-    <style>
-        @media (max-width: 400px) {
+            .boxBtn {
+                height: 8vw;
+                width: 15vw;
+                top: 0.5vw;
+                right: 0.5vw;
+
+                top: -4vw;
+                right: -7.5vw;
+                border-radius: 1vw;
+                font-size: 3vw;
+                font-weight: bold;
+            }
+            .box .deadline {
+                font-size: 3vw;
+                /* top: -0.5vw; */
+                opacity: 0.5;
+            }
+            .box .deadline::before {
+                content: '';
+            }
+            input[type="checkbox"] {
+                margin-top: 1vw;
+                right: -2vw;
+            }
+            #pageTitle {
+                padding: 1vw 4vw 1.5vw 4vw;
+                top: 3vw;
+                font-size: 6vw;
+            }
             #pageBody {
                 grid-auto-rows: auto auto auto auto;
                 grid-auto-columns: 85vw;
@@ -344,6 +448,70 @@ else{
             #pGD {
                 grid-area: 4/1/5/2;
             }
+            @media (min-width: 500px) {
+                input[type="checkbox"] {
+                    margin-top: 2vw;
+                    right: 0.5vw;
+                }
+                #pageTitle {
+                    font-size: 4vw;
+                    top: 0px;
+                    left: 0px;
+                    padding: 1vw;
+                    border-radius: 0px 0px 2vw 0px;
+                }
+            }
+        }
+        @media (prefers-color-scheme: dark) {
+            html {
+                /* filter: hue-rotate(180deg); */
+            }
+            *::selection {
+                background-color: #95c4f933;
+                text-shadow: 0px 0px 0.1vw #95c4f966;
+            }
+            *::-webkit-scrollbar {
+            background-color: #95c4f9;
+            }
+            *::-webkit-scrollbar-thumb {
+                border-radius: 100vw;
+                background-color: #2e4a6a;
+            }
+            html, body {
+                background-color: #95c4f9;
+            }
+            .box {
+                background-color: #ffffff;
+                border-color: #2e4a6a;
+            }
+            .box * {
+                color: #2e4a6a;
+            }
+            hr {
+                background-color: #2e4a6a;
+            }
+            #pageTitle {
+                color: #ffffff;
+                background-color: #2e4a6a;
+                box-shadow: 0px 0px 0.8vw 0px #000000;
+            }
+            .new {
+                background-color: #2e4a6a;
+                color: white;
+            }
+            #alertMask {
+                background-color: #00000088;
+            }
+            .boxBtn {
+                background-color: #95c4f9;
+                border-color: #2e4a6a;
+            }
+            #cCvs {
+                filter: hue-rotate(180deg);
+            }
+            input[type="checkbox"] {
+                filter: hue-rotate(345deg);
+            }
         }
     </style>
 </head>
@@ -356,7 +524,7 @@ else{
             </div>
         </div>
     </div>
-    <div id="pageTitle" onclick="goHome();">318 station</div>
+    <div id="pageTitle" onclick="goHome();"><?=$TITLE?></div>
     <div id="pageNotfound">
         <div class="box">
             <h1>找不到頁面</h1>
@@ -368,7 +536,7 @@ else{
     </div>
     <div id="pageHome">
         <div class="box" id="cD">
-            <h1>318課表</h1>
+            <h1>普一和課表</h1>
             <button class="boxBtn" onclick="DandN()" title="對課表進行顏色反向處理">切換</button>
             <hr class="bold">
             <div>
@@ -408,9 +576,9 @@ else{
         </div>
         <div class="box" id="pGD">
             <div>
-                <h3 data-href="<?=$pgU?>" title="前往上一篇" data-error="找不到上一頁" id="pgu" style="position: absolute; left: 1vw; display: inline-block; margin: 0px;">&lt;&lt;上一篇</h3>
+                <h3 data-href="<?=$pgU?>" title="前往上一篇" data-error="找不到上一頁" id="pgUp" style="position: absolute; left: 1vw; display: inline-block; margin: 0px;">&lt;&lt;上一篇</h3>
                 <h3 title="此篇為<?=$dayT?>" style="display: inline-block; margin: 0px; text-align: center; width: 100%;">～<?=$dayT?>～</h3>
-                <h3 data-href="<?=$pgD?>" title="前往下一篇" data-error="找不到下一頁" id="pgd" style="position: absolute; right: 1vw; display: inline-block;  margin: 0px;">下一篇&gt;&gt;</h3>
+                <h3 data-href="<?=$pgD?>" title="前往下一篇" data-error="找不到下一頁" id="pgDown" style="position: absolute; right: 1vw; display: inline-block;  margin: 0px;">下一篇&gt;&gt;</h3>
             </div>
         </div>
     </div>
@@ -425,56 +593,76 @@ else{
         let darkC = '<?=$darkC?>'
         let showCheckedTF = '<?=$showCheckedTF?>'
         const classrooms = {
-            "彈性": "https://classroom.google.com/c/MzY3MzQ2ODQ3OTA5", 
-            "國文": "https://classroom.google.com/c/MzczMDY0MzMwNjY0", 
-            "數學": "https://classroom.google.com/c/MzcyNzU4OTMwMjc4", 
-            "生物": "https://classroom.google.com/c/MzcyOTMxOTcxMzk2", 
-            "理化": "https://classroom.google.com/c/MzczMDg4Mjk1MTA5", 
-            "地科": "https://classroom.google.com/c/MzcxMDg2OTc5Mzg1", 
-            "歷史": "https://classroom.google.com/c/MzcxMDIwMzM4NDYx", 
-            "地理": "https://classroom.google.com/c/MzczMDQ0MTEyMzAy", 
-            "公民": "https://classroom.google.com/c/MzY0NzU4NDYwNzc2", 
-            "英語": "https://classroom.google.com/c/MzczMDY2MjUzMDE4", 
-            "體育": "https://classroom.google.com/c/MzczMjc2NDU5Njc1", 
-            "資訊": "https://classroom.google.com/c/MzcyODU1MDQ5MzIy"
+            "彈性": "https://classroom.google.com/c/NTM3NDY5OTY1MDA2", 
+            "國文": "https://classroom.google.com/c/NTI2MDA0NzE4NDU0", 
+            "數學": "https://classroom.google.com/c/NTM3NTE5NDk0NDc4", 
+            "物理": "", 
+            "地科": "https://classroom.google.com/c/NDk3Mjc5NTA0ODE2", 
+            "歷史": "https://classroom.google.com/c/NTM3NTIwODQ0Njcx", 
+            "公民": "", 
+            "英文": "https://classroom.google.com/c/NTM3MjcwMDAxMDA0", 
+            "英聽": "", 
+            "體育": "", 
+            "資訊": "https://classroom.google.com/c/NTI2MTU2OTExMjkw", 
+            "輔導": "", 
+            "生輔": ""
         }
         const meets = {
-            "彈性": "https://meet.google.com/lookup/grzyjlw3mm", 
-            "國文": "https://meet.google.com/lookup/gzpvabymzy", 
-            "數學": "https://meet.google.com/lookup/errt54od4d", 
-            "生物": "https://meet.google.com/lookup/bawdxm62do", 
-            "理化": "https://meet.google.com/bzm-qdsb-ywf", 
-            "地科": "https://meet.google.com/lookup/e27wcvt5eo", 
-            "歷史": "https://meet.google.com/lookup/akyp7wwacc", 
-            "地理": "https://meet.google.com/lookup/aviijnah5o", 
-            "公民": "https://meet.google.com/lookup/gspo3agpyx", 
-            "英語": "https://meet.google.com/lookup/hljdl5agzj", 
-            "體育": "https://meet.google.com/lookup/f5lkr73zud", 
-            "資訊": "https://meet.google.com/lookup/aybxerh5jl"
+            "彈性": "https://meet.google.com/jdc-egei-hjc", 
+            "國文": "https://meet.google.com/fjg-rsqk-gdo", 
+            "數學": "https://meet.google.com/xxa-hqza-oer", 
+            "物理": "", 
+            "地科": "", 
+            "歷史": "", 
+            "公民": "", 
+            "英文": "https://meet.google.com/vsc-zzas-nok", 
+            "英聽": "", 
+            "體育": "", 
+            "資訊": "https://meet.google.com/vmr-ezij-xpr", 
+            "輔導": "", 
+            "生輔": ""
+        }
+        const emails = {
+            "彈性": "stsai@gm.nssh.ntpc.edu.tw", 
+            "國文": "stanleychiu2022@gm.nssh.ntpc.edu.tw", 
+            "數學": "nanii@gm.nssh.ntpc.edu.tw", 
+            "物理": "", 
+            "地科": "seekingsteven@gm.nssh.ntpc.edu.tw", 
+            "歷史": "frog@gm.nssh.ntpc.edu.tw", 
+            "公民": "", 
+            "英文": "stsai@gm.nssh.ntpc.edu.tw", 
+            "英聽": "", 
+            "體育": "", 
+            "資訊": "johnson@gm.nssh.ntpc.edu.tw", 
+            "輔導": "", 
+            "生輔": ""
+        }
+        const resources = {
+            "彈性": "", 
+            "國文": "", 
+            "數學": "", 
+            "物理": "", 
+            "地科": "", 
+            "歷史": "", 
+            "公民": "", 
+            "英文": "", 
+            "英聽": "", 
+            "體育": "", 
+            "資訊": "https://drive.google.com/drive/folders/10AoHufvgBp1_4gBGiDakmLPZbF7xtNG7?usp=sharing", 
+            "輔導": "", 
+            "生輔": ""
         }
         let c_src = 'image/c.jpg';
-        let xs = [17.966101694915253, 33.898305084745760, 49.830508474576280, 65.762711864406780, 81.58192090395481, 97.51412429378531];
-        let ys = [23.089983022071305, 30.89983022071307, 38.79456706281834, 46.6044142614601, 54.58404074702886, 56.02716468590832, 63.83701188455009, 71.81663837011885, 79.71137521222411];
+        let xs = [23.2, 37.8, 52.6, 67.6, 82.0, 96.8];
+        let ys = [22.017045454545457, 30.255681818181817, 38.79456706281834, 46.6044142614601, 54.58404074702886, 62.12765957446808, 71.34751773049646, 79.14893617021276, 87.65957446808511];
         let cList = {
-            "00":"彈性", "01":"英語", "02":"地理", "03":"歷史", "05":"國文", "06":"數學", "07":"地科", 
-            "10":"彈性", "11":"英語", "12":"公民", "13":"地科", "15":"資訊", "16":"歷史", "17":"數學", 
-            "20":"彈性", "21":"公民", "22":"英語", "23":"英語", "25":"國文", "26":"理化", "27":"數學", 
-            "30":"彈性", "31":"英語", "32":"生物", "33":"地理", "35":"體育", "36":"數學", "37":"國文", 
-            "40":"彈性", "41":"理化", "42":"理化", "43":"生物", "45":"數學", "46":"國文", "47":"國文"
+            "0,0":"數學", "0,1":"國文", "0,2":"資訊", "0,3":"資訊", "0,4":"英文", "0,5":"物理", "0,6":"英聽", "0,7":"彈性", 
+            "1,0":"公民", "1,1":"數學", "1,2":"國文", "1,3":"國文", "1,4":"生輔", "1,5":"英文", "1,6":"彈性", "1,7":"彈性", 
+            "2,0":"輔導", "2,1":"數學", "2,2":"數學", "2,3":"英文", "2,4":"國文", "2,5":"歷史", "2,6":"體育", "2,7":"彈性", 
+            "3,0":"國文", "3,1":"地科", "3,2":"數學", "3,3":"體育", "3,4":"英文", "3,5":"公民", "3,6":"歷史", "3,7":"彈性", 
+            "4,0":"物理", "4,1":"數學", "4,2":"英文", "4,3":"英文", "4,4":"地科", "4,5":"國文", "4,6":"彈性", "4,7":"彈性"
         };
         let c_test = false;
-        if(true){
-            c_src = 'image/nc.jpg';
-            xs = [23.26388888888889, 35.76388888888889, 48.4375, 61.111111111111114, 73.61111111111111, 85.9375];
-            ys = [21.58365261813538, 29.374201787994892, 37.03703703703704, 44.827586206896555, 52.61813537675607, 53.63984674329502, 63.601532567049816, 71.51979565772669, 79.18263090676884];
-            cList = {
-                "00":"彈性", "01":"英語", "02":"地理", "03":"歷史", "05":"國文", "06":"數學", "07":"地科", 
-                "10":"彈性", "11":"英語", "12":"公民", "13":"地科", "15":"資訊", "16":"歷史", "17":"數學", 
-                "20":"彈性", "21":"公民", "22":"英語", "23":"英語", "25":"國文", "26":"理化", "27":"國文", 
-                "30":"彈性", "31":"英語", "32":"生物", "33":"地理", "35":"體育", "36":"數學", "37":"數學", 
-                "40":"彈性", "41":"理化", "42":"理化", "43":"生物", "45":"數學", "46":"國文", "47":"國文"
-            };
-        }
         const $_COOKIE = c;
         const $_GET = {};
         const page = '<?=$isDay?>';
@@ -512,8 +700,9 @@ else{
         }
         function pgEL(e){
             if(e.getAttribute('data-href') == 'false'){
-                $('#pGD > div').removeChild(e);
+                e.remove();
             }
+            console.log(e.getAttribute('data-href'));
             e.addEventListener('click', function(){
                 if(this.getAttribute('data-href') == 'false'){
                     alert(`錯誤！\n(${this.getAttribute('data-error')})`)
@@ -523,8 +712,8 @@ else{
                 }
             })
         }
-        pgEL($('#pgu'));
-        pgEL($('#pgd'));
+        pgEL($('#pgUp'));
+        pgEL($('#pgDown'));
         if(page == 'home'){
             document.body.removeChild($('#pageBody'));
             document.body.removeChild($('#pageNotfound'));
@@ -561,7 +750,7 @@ else{
             }
             cvs.addEventListener('click', function(e){
                 let x = (MX - offset(this)['left'])/offset(this)['width']*100;
-                let xx = 'false';
+                let xx = false;
                 for(let i = 0; i < xs.length; i++){
                     if(x > xs[i] && x < xs[i+1]){
                         xx = i;
@@ -569,18 +758,23 @@ else{
                     }
                 }
                 let y = (MY - offset(this)['top'])/offset(this)['height']*100;
-                let yy = 'false'
+                let yy = false;
                 for(let i = 0; i < ys.length; i++){
                     if(y > ys[i] && y < ys[i+1]){
                         yy = i;
                         break;
                     }
                 }
-                if(xx != 'false' && yy != 'false' && yy != 4 && !c_test){
-                    alert(cList[xx+''+yy]);
+                if(xx != 'false' && yy != 'false' && cList[`${xx},${yy}`] != undefined && !c_test){
+                    alert(cList[`${xx},${yy}`]);
                 }
-                else if(c_test){
-                    console.log(x, y);
+                if(c_test){
+                    if('table' in console){
+                        console.table({x: x, y: y, xx: xx, yy: yy});
+                    }
+                    else{
+                        console.log({x: x, y: y, xx: xx, yy: yy});
+                    }
                 }
             });
         }
@@ -590,7 +784,7 @@ else{
         });
         function goHome(){
             if(page != 'home'){
-                location.href = '../318station/?day=home';
+                location.href = '?day=home';
             }
         }
         document.addEventListener('mousemove', (e) => {
@@ -608,14 +802,30 @@ else{
             }
             return({'left':l, 'top':t, 'width':e.offsetWidth, 'height':e.offsetHeight});
         }
-        function alert(c){
+        function alert(c, data = false){
             $('#alertMask').style.opacity = '1';
             $('#alertMask').style.pointerEvents = 'auto';
             $('#alertTitle').innerText = c;
-            $('#alertInfo').innerHTML = `
-                <h2>GoogleClassroom:<a href="${classrooms[c]}">點我</a></h2>
-                <h2>GoogleMeet:<a href="${meets[c]}">點我</a></h2>
-            `
+            if(data != false){
+                infoHTML = '';
+                data.forEach(row => {
+                    infoHTML += `<h2>${row['name']}:<a target="_blank" href="${row['link']}">點我</a></h2>`;
+                });
+                $('#alertInfo').innerHTML = infoHTML;
+            }
+            else{
+                var hasClassroomLink = classrooms[c] != '' && classrooms[c] != undefined;
+                var hasMeetLink = meets[c] != '' && meets[c] != undefined;
+                var hasEmailLink = emails[c] != '' && emails[c] != undefined;
+                var hasResourceLink = resources[c] != '' && resources[c] != undefined;
+                let date = new Date();
+                $('#alertInfo').innerHTML = `
+                    ${hasClassroomLink ? `<h2>GoogleClassroom:<a target="_blank" href="${classrooms[c]}">點我</a></h2>` : ''}
+                    ${hasMeetLink ? `<h2>GoogleMeet:<a target="_blank" href="${meets[c]}">點我</a></h2>` : ''}
+                    ${hasEmailLink ? `<h2>Email:<a target="_blank" href="mailto:${emails[c]}?subject=${encodeURIComponent(`${c}老師您好！`)}&body=${encodeURIComponent(`敬愛的${c}老師：\n\n  您好！祝\nxxxx\n\n學生 xxx敬上\n${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`)}">點我</a></h2>` : ''}
+                    ${hasResourceLink ? `<h2>Resource:<a target="_blank" href="${resources[c]}">點我</a></h2>` : ''}
+                    `
+            }
         }
         $('#alertMask').addEventListener('click', () => {
             $('#alertMask').style.opacity = '0';
@@ -695,7 +905,7 @@ else{
             }
         }
         checkedHiddenner();
-        // if(!confirm('318station已不再更新，\n確認繼續訪問318station？')){
+        // if(!confirm('PYHstation已不再更新，\n確認繼續訪問PYHstation？')){
         //     location.href = 'http://school1.nssh.ntpc.edu.tw/modules/tad_web/index.php?WebID=95';
         // }
     </script>
